@@ -217,7 +217,7 @@ def uniformCostSearch(problem: SearchProblem) -> List[Directions]:
                 frontier.push(potential, potential.cost) #add unexplored successor to the frontier
 
     if final == None:
-        print("Search Failed! (BFS)")
+        print("Search Failed! (UCS)")
         return []
     else:
         #construct path home
