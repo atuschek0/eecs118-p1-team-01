@@ -39,6 +39,14 @@ class node:
         self.previous = p
         self.cost = price if price != None else 0
 
+class infCounter(util.Counter):
+    '''
+    Same as the Counter, except that the default value is infinity
+    '''
+    def __getitem__(self, idx):
+        self.setdefault(idx, float('inf'))
+        return dict.__getitem__(self, idx)
+
 class SearchProblem:
     """
     This class outlines the structure of a search problem, but doesn't implement
