@@ -88,8 +88,8 @@ class SearchAgent(Agent):
         else:
             if heuristic in globals().keys():
                 heur = globals()[heuristic]
-            elif heuristic in dir(search):
-                heur = getattr(search, heuristic)
+            elif heuristic in dir(p1_Search):
+                heur = getattr(p1_Search, heuristic)
             else:
                 raise AttributeError(heuristic + ' is not a function in searchAgents.py or p1_Search.py.')
             print('[SearchAgent] using function %s and heuristic %s' % (fn, heuristic))
