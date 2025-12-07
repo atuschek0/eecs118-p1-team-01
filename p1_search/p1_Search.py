@@ -249,7 +249,69 @@ def nullHeuristic(state, problem=None) -> float:
 def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic) -> List[Directions]:
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    origin = problem.getStartState()
+    originNode = node(origin)
+    final = None #contains last node of search
+
+    # Counter for the minimum cost from origin to some state
+    gScore = infCounter()
+    gScore[origin] = 0
+
+    # Counter for gScore + heuristic
+    fScore = infCounter()
+    fScore[origin] = 0
+    
+
+    frontier = util.PriorityQueueWithFunction(lambda x: fScore[x.state])
+    # explored = set() # openlist
+    final = None
+    
+    
+    frontier.push(originNode) # cost is 0
+
+    while not frontier.isEmpty():
+        current = frontier.pop()
+        currentState = current.state
+        # print(currentState)
+        """ if currentState in explored:
+            continue """
+        if problem.isGoalState(currentState):
+            final = current
+            break
+        #explored.add(currentState)
+        succList = problem.getSuccessors(currentState)
+        for succ, act, cost in succList: #iterate thru list of successors
+
+            tentative_gScore = gScore[currentState] + cost
+
+            # check if the tentative cost is less than has currently been recorded
+            if tentative_gScore < gScore[succ]:
+                gScore[succ] = tentative_gScore
+                fScore[succ] = tentative_gScore + heuristic(succ, problem)
+                
+                state_list = [x[0] for x in frontier.heap]
+                #print(state_list)
+                explored = set(state_list)
+
+                if succ not in explored:
+                    potential = node(succ, act, current, cost)
+                    frontier.push(potential) #add unexplored successor to the frontier
+
+    if final == None:
+        print("Search Failed! (A*)")
+        return []
+    else:
+        #construct path home
+        path = []
+        returnNode = final
+        while returnNode.action is not None:
+            #print(returnNode.state, returnNode.action, returnNode.previous.state)
+            path.insert(0, returnNode.action)
+            returnNode = returnNode.previous
+        print(returnNode)
+        return path
+    
 
 # Abbreviations
 bfs = breadthFirstSearch
