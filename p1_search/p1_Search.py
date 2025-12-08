@@ -260,11 +260,11 @@ def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic) -> List[Directi
 
     # Counter for gScore + heuristic
     fScore = infCounter()
-    fScore[origin] = 0
+    fScore[origin] = heuristic(origin, problem)
     
 
     frontier = util.PriorityQueueWithFunction(lambda x: fScore[x.state])
-    # explored = set() # openlist
+    # visited = set() # openlist
     final = None
     
     
@@ -279,7 +279,9 @@ def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic) -> List[Directi
         if problem.isGoalState(currentState):
             final = current
             break
-        #explored.add(currentState)
+        """ if current in visited:
+            continue """
+        #visited.add(currentState)
         succList = problem.getSuccessors(currentState)
         for succ, act, cost in succList: #iterate thru list of successors
 
