@@ -379,7 +379,47 @@ def cornersHeuristic(state: Any, problem: CornersProblem):
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
     "*** YOUR CODE HERE ***"
-    return 0 # Default to trivial solution
+    if problem.isGoalState(state):
+        return 0
+
+    SCALE_FACTOR = 1
+    pos = state[0]
+    lowest_dist = float('inf')
+    flags = state[1]
+    closest = None
+
+    manD = lambda xy1, xy2: abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1])
+    eucD = lambda xy1, xy2: ( (xy1[0] - xy2[0]) ** 2 + (xy1[1] - xy2[1]) ** 2 ) ** 0.5
+
+    leftovers = [corners[x] for x in list(range(4)) if (not flags[x])]
+    # print(flags, leftovers)
+
+    # Estimate distance to next corner
+    for corner in leftovers:
+        m_dist = manD(corner, pos)
+        if m_dist < lowest_dist:
+            lowest_dist = m_dist
+            closest = corner
+
+    # Estimate going from closest corner to the rest
+    leftovers.remove(closest)
+
+    catchup = 0
+
+    while (leftovers):
+        l_dist = float('inf')
+        for corner in leftovers:
+            m_dist = manD(closest, corner)
+            if m_dist < l_dist:
+                next_closest = corner
+                l_dist = m_dist
+        
+        closest = next_closest
+        catchup += l_dist
+        leftovers.remove(next_closest)
+    
+    estimate = lowest_dist + catchup
+    return SCALE_FACTOR * estimate
 
 
 
