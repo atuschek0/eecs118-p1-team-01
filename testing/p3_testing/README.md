@@ -2,7 +2,11 @@
 
 Testing in progress. 
 
-Completed: E31 and E32.
+### Pending Tests
+- E33: autograder
+- E34: autograder, test case E34.4
+- E35: ALL
+
 
 ## E31 -- Implement A\* Search Algorithm
 
@@ -229,18 +233,54 @@ python autograder.py -q E34
 ### E34 Testing
 
 **E34.1 Food Search - Test Search Layout**
+
+![E34 test food search](e34_test.png)
+
 ```
-python catman.py -l testSearch -p AStarFoodSearchAgent
+$ python catman.py -l testSearch -p AStarFoodSearchAgent
+
+AGENT INDEX: 0 TYPE: True
+Path found with total cost of 7 in 0.0 seconds
+Search nodes expanded: 10
+Pacman emerges victorious! Score: 513
+Average Score: 513.0
+Scores:        513.0
+Win Rate:      1/1 (1.00)
+Record:        Win
 ```
 
 **E34.2 Food Search - Tiny Search Layout**
+
+![E34 tiny food search](e34_tiny.png)
+
 ```
-python catman.py -l tinySearch -p AStarFoodSearchAgent
+$ python catman.py -l tinySearch -p AStarFoodSearchAgent
+
+AGENT INDEX: 0 TYPE: True
+Path found with total cost of 27 in 0.2 seconds
+Search nodes expanded: 2410
+Pacman emerges victorious! Score: 573
+Average Score: 573.0
+Scores:        573.0
+Win Rate:      1/1 (1.00)
+Record:        Win
 ```
 
 **E34.3 Food Search - Tricky Search Layout**
+
+![E34 tricky food search](e34_tricky.png)
+
 ```
-python catman.py -l trickySearch -p AStarFoodSearchAgent
+$ python catman.py -l trickySearch -p AStarFoodSearchAgent
+
+AGENT INDEX: 0 TYPE: True
+Path found with total cost of 60 in 0.6 seconds
+Search nodes expanded: 4239
+Pacman emerges victorious! Score: 570
+Average Score: 570.0
+Scores:        570.0
+Win Rate:      1/1 (1.00)
+Record:        Win
 ```
 
 **E34.4 Food Search - Medium Search Layout**
